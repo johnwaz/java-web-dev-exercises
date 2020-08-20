@@ -1,4 +1,4 @@
-package exercises;
+package practice;
 
 public class Practice {
     // make a method
