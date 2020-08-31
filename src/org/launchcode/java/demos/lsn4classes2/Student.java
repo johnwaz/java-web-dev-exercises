@@ -34,11 +34,11 @@ public class Student {
      //TODO: Uncomment and complete the getGradeLevel method here:
     public String getGradeLevel() {
         // Determine the grade level of the student based on numberOfCredits
-        if (numberOfCredits >= 0 && numberOfCredits <= 29) {
+        if (numberOfCredits < 30) {
            return "Freshman";
-        } else if (numberOfCredits >= 30 && numberOfCredits <= 59) {
+        } else if (numberOfCredits < 60) {
             return "Sophomore";
-        } else if (numberOfCredits >= 60 && numberOfCredits <= 89) {
+        } else if (numberOfCredits < 90) {
             return "Junior";
         } else {
             return "Senior";
@@ -48,21 +48,21 @@ public class Student {
     // TODO: Complete the addGrade method.
     public void addGrade(int courseCredits, double grade) {
         // Update the appropriate fields: numberOfCredits, gpa
-        double currentQualityScore = gpa * numberOfCredits;
+        double currentQualityScore = this.gpa * this.numberOfCredits;
         double qualityScore = grade * courseCredits;
         double totalQualityScore = currentQualityScore + qualityScore;
-        numberOfCredits = numberOfCredits + courseCredits;
-        gpa = Math.round((totalQualityScore / numberOfCredits) * 100.0) / 100.0;
+        this.numberOfCredits += courseCredits;
+        this.gpa = Math.round((totalQualityScore / this.numberOfCredits) * 100.0) / 100.0;
     }
 
     // TODO: Add your custom 'toString' method here. Make sure it returns a well-formatted String rather
     //  than just the class fields.
     @Override
     public String toString() {
-        return "Student " +
-                name + " has student ID: " + studentId +
-                ", number of credits: " + numberOfCredits +
-                ", and GPA: " + gpa;
+        return "Student name: " + name +
+                ", Student ID: " + studentId +
+                ", Credits: " + numberOfCredits +
+                ", GPA: " + gpa;
     }
 
     // TODO: Add your custom 'equals' method here. Consider which fields should match in order to call two
@@ -73,14 +73,15 @@ public class Student {
         if (o == null || getClass() != o.getClass()) return false;
         Student student = (Student) o;
         return studentId == student.studentId &&
-                name.equals(student.name);
+                numberOfCredits == student.numberOfCredits &&
+                Double.compare(student.gpa, gpa) == 0;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, studentId);
+        return Objects.hash(studentId, numberOfCredits, gpa);
     }
-
+    
     public String getName() {
         return name;
     }
@@ -121,5 +122,8 @@ public class Student {
         System.out.println(sally);
         sally.addGrade(25, 3.8);
         System.out.println(sally);
+        Student john = new Student("John", 2, 1, 4.0);
+        System.out.println(john);
+        System.out.println(john.getGradeLevel());
     }
 }
