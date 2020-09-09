@@ -81,7 +81,7 @@ public class Student {
     public int hashCode() {
         return Objects.hash(studentId, numberOfCredits, gpa);
     }
-    
+
     public String getName() {
         return name;
     }
