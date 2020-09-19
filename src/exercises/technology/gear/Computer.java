@@ -1,6 +1,6 @@
 package exercises.technology.gear;
 
-public class Computer {
+public class Computer extends AbstractEntity{
 
     private boolean isOn = true;
     private boolean inOperation = true;
@@ -47,5 +47,10 @@ public class Computer {
 
     public void restart() {
         updated = false;
+    }
+
+    @Override
+    public int assignId(int id) {
+        return id;
     }
 }
